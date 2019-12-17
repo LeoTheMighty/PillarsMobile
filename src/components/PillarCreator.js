@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ChromePicker } from 'react-color';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { Divider, Header } from 'react-native-elements';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Divider, Header } from 'react-native-elements';
 import { addPillar } from '../redux/actions/userActions';
 import { newPillar } from '../logic/PillarHelper';
 import type Pillar from '../types/Pillar';
@@ -106,22 +106,9 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
 
   return (
     <View align="center">
-      <Form
-        onSubmit={() =>
-          createPillar(
-            name,
-            description,
-            color,
-            closeView,
-            addPillarRedux,
-            setSuccess,
-            setIsLoading,
-            setError,
-          )
-        }
-      >
+      <View>
         <Header as="h4">
-          <Form.Input
+          <TextInput
             fluid
             type="text"
             name="name"
@@ -130,7 +117,7 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
           />
         </Header>
         <Header as="h5">
-          <Form.Input
+          <TextInput
             fluid
             type="text"
             name="description"
@@ -138,7 +125,7 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
             onChange={(value) => setDescription(value.target.value)}
           />
         </Header>
-      </Form>
+      </View>
       <Header as="h5">Choose the Color</Header>
       <ChromePicker
         color={color}
@@ -149,12 +136,12 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
         <View align="center">
           <View centered>
             <View centered>
-              <View.Column>
+              <View>
                 <View>
                   {displayError(error)}
                   {createSuccessLabel(success)}
                 </View>
-              </View.Column>
+              </View>
             </View>
           </View>
         </View>

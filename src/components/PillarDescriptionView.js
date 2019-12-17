@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChromePicker } from 'react-color';
+import { ColorPicker } from 'react-native-color-picker';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button, Header } from 'react-native-elements';
 import type Pillar from '../types/Pillar';
@@ -95,10 +95,9 @@ const PillarDescriptionView = ({
       <View>
         <Text>Color:</Text>
         {isEditing ? (
-          <ChromePicker
+          <ColorPicker
             color={currentPillar.color}
-            onChangeComplete={(c) => setPillarValue('color', c.hex)}
-            disableAlpha
+            onColorSelected={(c) => setPillarValue('color', c.hex)}
           />
         ) : (
           <View

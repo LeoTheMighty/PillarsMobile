@@ -6395,6 +6395,14 @@ react-native-check-box@^2.1.7:
   dependencies:
     prop-types "^15.5.7"
 
+react-native-color-picker@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-color-picker/-/react-native-color-picker-0.4.4.tgz#9594a4932d992a27dbc82e2c3c3ab80f1262c05d"
+  integrity sha512-3MRUsB2COiusFnOrchSi/BB96tjMElO9fapda6SGaXfpFIpzfoAk0YPKj4lwbS7QNo8OAasasZPhdivhpBYQVA==
+  dependencies:
+    prop-types "^15.5.10"
+    tinycolor2 "^1.4.1"
+
 react-native-elements@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.2.7.tgz#1eca2db715c41722aeb67aea62bd2a4621adb134"
