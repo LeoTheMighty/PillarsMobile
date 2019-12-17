@@ -13,6 +13,7 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import MainView from './src/layout/MainView';
 import store from './src/redux/store';
 import IntroView from './src/layout/IntroView';
+import SplashScreen from './src/layout/SplashScreen';
 
 const routes = [
   {
@@ -78,7 +79,11 @@ const App = () => {
             onIndexChange={(i) => setIndex(i)}
             renderScene={SceneMap({
               first: () => <IntroView />,
-              second: () => <MainView />,
+              second: () => (
+                <SplashScreen>
+                  <MainView />
+                </SplashScreen>
+              ),
               test: Test,
             })}
             tabBarPosition="bottom"

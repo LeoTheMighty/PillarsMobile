@@ -49,6 +49,7 @@ const MainView = ({
   setInfoModalOpenRedux,
   setAdminModalOpenRedux,
 }: Props) => {
+  console.log(JSON.stringify(user));
   return (
     <View>
       <View
