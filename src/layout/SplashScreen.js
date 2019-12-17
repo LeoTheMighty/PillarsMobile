@@ -20,8 +20,8 @@ const loadingScreen = () => (
         style={{
           minWidth: 340,
           maxWidth: 800,
-          marginBottom: '-60px',
-          marginTop: '120px',
+          marginBottom: -60,
+          marginTop: 120,
         }}
       >
         <View basic>

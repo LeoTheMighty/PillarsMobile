@@ -3,26 +3,29 @@ import {
   SAVE_USER,
   ADD_PILLAR,
   EDIT_PILLAR,
-  REMOVE_PILLAR, ADD_SUBMISSION, REMOVE_SUBMISSION,
+  REMOVE_PILLAR,
+  ADD_SUBMISSION,
+  REMOVE_SUBMISSION,
 } from '../typeConstants';
 import UserStorage from '../../api/UserStorage';
 import { newUser } from '../../logic/PillarsUserHelper';
-import {setInfoModalOpen} from "./flowActions";
+import { setInfoModalOpen } from './flowActions';
 
 // For all the actions regarding the actual user using the app. (Will be used to access cloud storage of the User's
 // progress and whatnot). May use API calls to retrieve info.
 
 export const updateUser = (successHandler) => {
   return (dispatch) => {
-    let user = UserStorage.loadUser();
-    if (!user) {
-      alert('Generating new user!');
-      user = newUser();
-      UserStorage.saveUser(user);
-      dispatch(setInfoModalOpen(true));
-    }
-    dispatch(loadUser(user));
-    successHandler && successHandler();
+    UserStorage.loadUser().then((user) => {
+      if (!user) {
+        alert('Generating new user!');
+        user = newUser();
+        UserStorage.saveUser(user);
+        dispatch(setInfoModalOpen(true));
+      }
+      dispatch(loadUser(user));
+      successHandler && successHandler();
+    });
   };
 };
 
@@ -33,8 +36,9 @@ export const updateUser = (successHandler) => {
  */
 export const saveUserToStorage = () => {
   return (dispatch, getStore) => {
-    UserStorage.saveUser(getStore().user.user);
-    dispatch(saveUser());
+    UserStorage.saveUser(getStore().user.user).then(() => {
+      dispatch(saveUser());
+    });
   };
 };
 

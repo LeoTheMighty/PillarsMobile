@@ -59,7 +59,7 @@ const MainView = ({
         style={{
           height: '91vh',
           background: 'rgba(256, 256, 256, 0.3)',
-          marginTop: '20px',
+          marginTop: '20',
         }}
       >
         <View>

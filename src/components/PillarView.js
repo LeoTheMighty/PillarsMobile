@@ -123,7 +123,7 @@ const PillarView = ({
         'border-color': 'rgb(187,187,187)',
         'border-style': 'solid',
         'border-width': 'thin',
-        'border-radius': '4px',
+        'border-radius': 4,
         height: `${(value + 0.01) * 75}vh`,
         transition: 'height 0.8s',
         alignItems: 'center',

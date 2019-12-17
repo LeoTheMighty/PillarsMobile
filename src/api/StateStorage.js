@@ -1,3 +1,5 @@
+import { AsyncStorage } from 'react-native';
+
 /**
  * Short-term storage for the state of the flow of the app and for non-essential info.
  */

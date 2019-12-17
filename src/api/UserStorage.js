@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { _randomPillars } from '../logic/PillarHelper';
 import { RANDOMIZE_PILLARS } from '../logic/Constants';
 
@@ -14,13 +15,13 @@ class UserStorage {
    *
    * @return {PillarsUser | null} The user object retrieved from the storage or null if there was no user object found.
    */
-  static loadUser() {
+  static async loadUser() {
     if (RANDOMIZE_PILLARS) {
       return {
         pillars: _randomPillars(5),
       };
     }
-    const userJSON = localStorage.getItem(UserStorage.storageKey);
+    const userJSON = await AsyncStorage.getItem(UserStorage.storageKey);
     return userJSON ? JSON.parse(userJSON) : null;
   }
 
@@ -30,9 +31,9 @@ class UserStorage {
    * @param {PillarsUser} user The user object to save into the storage.
    * @return{void}
    */
-  static saveUser(user) {
+  static async saveUser(user) {
     if (!RANDOMIZE_PILLARS) {
-      localStorage.setItem(UserStorage.storageKey, JSON.stringify(user));
+      await AsyncStorage.setItem(UserStorage.storageKey, JSON.stringify(user));
     }
   }
 }
