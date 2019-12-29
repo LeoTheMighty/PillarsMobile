@@ -5,7 +5,7 @@ import { Button, Header } from 'react-native-elements';
 import type Pillar from '../types/Pillar';
 import { LOADING_TIME } from '../logic/Constants';
 import { deepCopyPillar } from '../logic/PillarHelper';
-import { convertHexToHSL } from '../logic/ColorHelper';
+import { convertHexToHSL, convertHSVToHex } from '../logic/ColorHelper';
 
 type Props = {
   pillar: Pillar,
@@ -96,8 +96,10 @@ const PillarDescriptionView = ({
         <Text>Color:</Text>
         {isEditing ? (
           <ColorPicker
+            defaultColor={currentPillar.color}
             color={currentPillar.color}
-            onColorSelected={(c) => setPillarValue('color', c.hex)}
+            onColorChange={(c) => setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))}
+            onColorSelected={(c) => setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))}
           />
         ) : (
           <View

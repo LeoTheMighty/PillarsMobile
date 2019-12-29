@@ -45,7 +45,7 @@ const AllPillarsView = ({
       <View
         columns={pillars.length}
         style={{
-          height: '80vh',
+          height: '80%',
         }}
       >
         {pillars.length > 0 ? (
@@ -66,7 +66,7 @@ const AllPillarsView = ({
         ) : (
           <View key={1} verticalAlign="middle">
             <Text>
-              No Pillars Yet! Press the {<Icon name="plus" />}Button to Start!
+              No Pillars Yet! Press the "+" Button to Start!
             </Text>
           </View>
         )}

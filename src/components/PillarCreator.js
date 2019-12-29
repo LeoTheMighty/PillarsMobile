@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { ChromePicker } from 'react-color';
+import { ColorPicker } from 'react-native-color-picker';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button, Divider, Header } from 'react-native-elements';
 import { addPillar } from '../redux/actions/userActions';
 import { newPillar } from '../logic/PillarHelper';
 import type Pillar from '../types/Pillar';
 import { LOADING_TIME } from '../logic/Constants';
+import { convertHSVToHex } from '../logic/ColorHelper';
 
 type Props = {
   closeView: () => void,
@@ -127,10 +128,11 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
         </Header>
       </View>
       <Header as="h5">Choose the Color</Header>
-      <ChromePicker
+      <ColorPicker
+        defaultColor={color}
         color={color}
-        onChangeComplete={(c) => setColor(c.hex)}
-        disableAlpha
+        onColorChange={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
+        onColorSelected={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
       />
       <View align="center">
         <View align="center">

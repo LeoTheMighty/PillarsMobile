@@ -57,9 +57,9 @@ const MainView = ({
         vertical
         widths={1}
         style={{
-          height: '91vh',
+          height: '91%',
           background: 'rgba(256, 256, 256, 0.3)',
-          marginTop: '20',
+          marginTop: 20,
         }}
       >
         <View>
