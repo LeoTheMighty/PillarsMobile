@@ -155,7 +155,7 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
           disabled={isLoading}
           primary
           size="big"
-          type="button"
+          // type="button"
           onClick={() =>
             createPillar(
               name,

@@ -46,9 +46,13 @@ const PillarIntervalViewEditor = ({
         </View>
         <View>
           {flow.currentIntervalView === 'start' || [
-            <Text color="black">{`How many ${flow.currentIntervalView}s`}</Text>,
+            <Text
+              key="1"
+              color="black"
+            >{`How many ${flow.currentIntervalView}s`}</Text>,
             <TextInput
-              value={flow.currentIntervalSpan}
+              key="2"
+              value={flow.currentIntervalSpan.toString(10)}
               onChange={(e) =>
                 e.target.value > 0 && setIntervalSpanRedux(e.target.value)
               }

@@ -116,7 +116,7 @@ const PillarDescriptionView = ({
       <View>
         <Button
           primary={!isEditing}
-          icon={isEditing ? 'save' : 'pencil'}
+          // icon={isEditing ? 'save' : 'pencil'}
           onClick={() => {
             isEditing && editPillarRedux(currentPillar);
             setIsEditing((p) => !p);
