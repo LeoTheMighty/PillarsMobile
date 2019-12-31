@@ -207,7 +207,9 @@ const PillarView = ({
 };
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+
+  },
 });
 
 export default PillarView;

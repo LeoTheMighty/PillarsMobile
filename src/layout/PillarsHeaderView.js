@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Modal, StyleSheet, View } from 'react-native';
-import { Button, Header } from 'react-native-elements';
+import { Alert, Modal, StyleSheet, Text, View } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 import PillarCreator from '../components/PillarCreator';
 import type { FlowReducer } from '../redux/reducers/flowReducer';
 import {
@@ -42,78 +42,85 @@ const PillarsHeaderView = ({
     false,
   );
   return (
-    <View fluid>
-      <View columns="equal">
-        <View>
-          <Button
-            primary
-            icon="eye"
-            onClick={() =>
-              intervalViewChangerIsOpen || setIntervalViewChangerIsOpen(true)
-            }
-          />
-          <Modal
-            open={intervalViewChangerIsOpen}
-            onClose={() => setIntervalViewChangerIsOpen(false)}
-            closeIcon
-          >
-            <Header>Choose the Pillar View</Header>
-            <View>
-              <PillarIntervalViewEditor
-                flow={flow}
-                setIntervalViewRedux={setIntervalViewRedux}
-                setIntervalSpanRedux={setIntervalSpanRedux}
-              />
-            </View>
-          </Modal>
-        </View>
-        <View>
-          <Button
-            icon="plus"
-            primary
-            onClick={() => creatorIsOpen || setCreatorIsOpen(true)}
-          />
-          <Modal
-            closeIcon
-            open={creatorIsOpen}
-            onClose={() => setCreatorIsOpen(false)}
-          >
-            <Header>Pillar Creator</Header>
-            <View>
-              <PillarCreator closeView={() => setCreatorIsOpen(false)} />
-            </View>
-          </Modal>
-        </View>
-        <View>
-          <Button
-            primary={!flow.isChecking}
-            icon="check circle"
-            onClick={() => setIsCheckingRedux(!flow.isChecking)}
-          />
-        </View>
-        <View>
-          <Button
-            primary
-            icon="info circle"
-            onClick={() => setInfoModalOpenRedux(true)}
-          />
-        </View>
-        {isDevelopment && (
+    <View style={styles.main}>
+      <View style={styles.intervalEditorColumn}>
+        <Button
+          title="Interval Editor Button"
+          icon={<Icon name="arrow right" />}
+          onPress={() =>
+            intervalViewChangerIsOpen || setIntervalViewChangerIsOpen(true)
+          }
+        />
+        <Modal
+          visible={intervalViewChangerIsOpen}
+          onDismiss={() => setIntervalViewChangerIsOpen(false)}
+        >
+          <Text style={styles.header}>Choose the Pillar View</Text>
           <View>
-            <Button
-              primary
-              icon="adn"
-              onClick={() => setAdminModalOpenRedux(true)}
+            <PillarIntervalViewEditor
+              flow={flow}
+              setIntervalViewRedux={setIntervalViewRedux}
+              setIntervalSpanRedux={setIntervalSpanRedux}
             />
           </View>
-        )}
+        </Modal>
       </View>
+      <View style={styles.pillarCreatorColumn}>
+        <Button
+          title="Pillar Creator Button"
+          icon={<Icon name="plus" />}
+          onPress={() => creatorIsOpen || setCreatorIsOpen(true)}
+        />
+        <Modal
+          visible={creatorIsOpen}
+          onDismiss={() => setCreatorIsOpen(false)}
+        >
+          <Text style={styles.header}>Pillar Creator</Text>
+          <View>
+            <PillarCreator closeView={() => setCreatorIsOpen(false)} />
+          </View>
+        </Modal>
+      </View>
+      <View style={styles.pillarCheckerColumn}>
+        <Button
+          title="Pillar Checker Button"
+          icon={<Icon name="check-square" />}
+          onPress={() => setIsCheckingRedux(!flow.isChecking)}
+        />
+      </View>
+      <View style={styles.infoColumn}>
+        <Button
+          title="Info Button"
+          icon={<Icon name="info" />}
+          onPress={() => setInfoModalOpenRedux(true)}
+        />
+      </View>
+      {isDevelopment && (
+        <View style={styles.adminColumn}>
+          <Button
+            title="Admin Button"
+            icon={<Icon name="arrow right" />}
+            onPress={() => setAdminModalOpenRedux(true)}
+          />
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+    // House all the flex-box stuff in here! Replacement for Grids.
+    flexDirection: 'column',
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  intervalEditorColumn: {},
+  pillarCreatorColumn: {},
+  pillarCheckerColumn: {},
+  infoColumn: {},
+  adminColumn: {},
+  header: {},
 });
 
 export default connect(

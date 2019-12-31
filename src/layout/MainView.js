@@ -18,6 +18,7 @@ import {
 } from '../redux/actions/flowActions';
 import IntroView from './IntroView';
 import AdminView from '../components/devTools/AdminView';
+import type Pillar from '../types/Pillar';
 
 type Props = {
   // Redux State
@@ -49,48 +50,32 @@ const MainView = ({
   setInfoModalOpenRedux,
   setAdminModalOpenRedux,
 }: Props) => {
-  console.log(JSON.stringify(user));
   return (
-    <View>
-      <View
-        fluid
-        vertical
-        widths={1}
-        style={{
-          height: '91%',
-          background: 'rgba(256, 256, 256, 0.3)',
-          marginTop: 20,
-        }}
-      >
-        <View>
-          <PillarsHeaderView />
-        </View>
-        <View style={{ background: 'rgba(256, 256, 256, 0.5)' }}>
-          <View fluid>
-            <AllPillarsView
-              pillars={user.user.pillars}
-              intervalView={flow.currentIntervalView}
-              intervalSpan={flow.currentIntervalSpan}
-              submitting={flow.isChecking}
-              addSubmissionRedux={addSubmissionRedux}
-              removeSubmissionRedux={removeSubmissionRedux}
-              editPillarRedux={editPillarRedux}
-              deletePillarRedux={deletePillarRedux}
-            />
-          </View>
-        </View>
+    <View style={styles.main}>
+      <View style={styles.pillarsHeaderContainer}>
+        <PillarsHeaderView />
+      </View>
+      <View style={styles.allPillarsContainer}>
+        <AllPillarsView
+          pillars={user.user.pillars}
+          intervalView={flow.currentIntervalView}
+          intervalSpan={flow.currentIntervalSpan}
+          submitting={flow.isChecking}
+          addSubmissionRedux={addSubmissionRedux}
+          removeSubmissionRedux={removeSubmissionRedux}
+          editPillarRedux={editPillarRedux}
+          deletePillarRedux={deletePillarRedux}
+        />
       </View>
       <Modal
-        open={flow.infoModalOpen}
-        onClose={() => setInfoModalOpenRedux(false)}
-        closeIcon
+        visible={flow.infoModalOpen}
+        onDismiss={() => setInfoModalOpenRedux(false)}
       >
         <IntroView />
       </Modal>
       <Modal
-        open={flow.adminModalOpen}
-        onClose={() => setAdminModalOpenRedux(false)}
-        closeIcon
+        visible={flow.adminModalOpen}
+        onDismiss={() => setAdminModalOpenRedux(false)}
       >
         <AdminView />
       </Modal>
@@ -99,7 +84,18 @@ const MainView = ({
 };
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+    flexDirection: 'column',
+    height: '91%',
+    background: 'rgba(256, 256, 256, 0.3)',
+    marginTop: 20,
+  },
+  pillarsHeaderContainer: {
+    backgroundColor: 'rgba(256, 256, 0, 0.5)',
+  },
+  allPillarsContainer: {
+    backgroundColor: 'rgba(256, 256, 256, 0.5)',
+  },
 });
 
 export default connect(

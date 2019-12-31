@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
-import { Header, Image } from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
+import { Image } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { updateUser } from '../redux/actions/userActions';
 import Logo from '../img/pillars.png';
@@ -11,27 +11,9 @@ import Logo from '../img/pillars.png';
  * @return {*} The jsx for displaying the component
  */
 const loadingScreen = () => (
-  <View style={{ textAlign: 'center' }}>
-    <View>
-      <View
-        raised
-        padded
-        inverted
-        style={{
-          minWidth: 340,
-          maxWidth: 800,
-          marginBottom: -60,
-          marginTop: 120,
-        }}
-      >
-        <View basic>
-          <Image source={Logo} size="tiny" centered />
-          <Header as="h2" inverted textAlign="center">
-            Loading...
-          </Header>
-        </View>
-      </View>
-    </View>
+  <View style={styles.loadingContainer}>
+    <Image source={Logo} style={styles.loadingImage} />
+    <Text style={styles.loadingText}>Loading...</Text>
   </View>
 );
 
@@ -54,6 +36,23 @@ const SplashScreen = ({ children, updateUserRedux }) => {
 
   return isLoading ? loadingScreen() : children;
 };
+
+const styles = StyleSheet.create({
+  main: {},
+  loadingContainer: {
+    textAlign: 'center',
+    minWidth: 340,
+    maxWidth: 800,
+    marginBottom: -60,
+    marginTop: 120,
+  },
+  loadingImage: {
+    textAlign: 'center',
+  },
+  loadingText: {
+    textAlign: 'center',
+  },
+});
 
 export default connect(() => ({}), {
   updateUserRedux: (successHandler) => updateUser(successHandler),
