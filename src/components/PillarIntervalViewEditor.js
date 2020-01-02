@@ -22,7 +22,7 @@ const PillarIntervalViewEditor = ({
 }: Props) => {
   return (
     <View style={styles.main}>
-      <View>
+      <View style={styles.intervalTypeContainer}>
         <Picker
           label="Type of interval"
           value={flow.currentIntervalView}
@@ -43,21 +43,23 @@ const PillarIntervalViewEditor = ({
           }}
         />
       </View>
-      <View>
-        {flow.currentIntervalView === 'start' || [
-          <Text
-            key="1"
-            color="black"
-          >{`How many ${flow.currentIntervalView}s`}</Text>,
-          <TextInput
-            key="2"
-            value={flow.currentIntervalSpan.toString(10)}
-            onChange={(e) =>
-              e.target.value > 0 && setIntervalSpanRedux(e.target.value)
-            }
-            type="number"
-          />,
-        ]}
+      <View style={styles.intervalSpanContainer}>
+        {flow.currentIntervalView === 'start' || (
+          <View>
+            <Text key="1" color="black">
+              {`How many ${flow.currentIntervalView}s`}
+            </Text>
+            <TextInput
+              key="2"
+              value={flow.currentIntervalSpan.toString(10)}
+              onChange={(e) =>
+                e.target.valueOf() > 0 &&
+                setIntervalSpanRedux(e.target.valueOf())
+              }
+              type="number"
+            />
+          </View>
+        )}
       </View>
     </View>
   );
@@ -69,6 +71,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  intervalTypeContainer: {},
+  intervalSpanContainer: {},
 });
 
 export default PillarIntervalViewEditor;

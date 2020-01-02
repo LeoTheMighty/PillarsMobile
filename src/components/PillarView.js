@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckBox, Modal, StyleSheet, View } from 'react-native';
+import { CheckBox, Modal, StyleSheet, Text, View } from 'react-native';
 import { Button, Header } from 'react-native-elements';
 import type Pillar from '../types/Pillar';
 import {
@@ -120,20 +120,17 @@ const PillarView = ({
   return (
     <View
       style={{
-        'border-color': 'rgb(187,187,187)',
-        'border-style': 'solid',
-        'border-width': 'thin',
-        'border-radius': 4,
+        borderColor: 'rgb(187,187,187)',
+        borderStyle: 'solid',
+        borderWidth: 'thin',
+        borderRadius: 4,
         height: `${(value + 0.01) * 75}%`,
-        transition: 'height 0.8s',
         alignItems: 'center',
         justifyContent: 'center',
         color: getTextColor(pillar.color),
-        background: `linear-gradient(to bottom right, ${shineColor}, ${pillar.color}, ${pillar.color}, ${shineColor}, ${pillar.color})`,
-        position: 'relative',
+        backgroundColor: `linear-gradient(to bottom right, ${shineColor}, ${pillar.color}, ${pillar.color}, ${shineColor}, ${pillar.color})`,
       }}
-      role="button"
-      onClick={() =>
+      onTouchEnd={() =>
         !submitting && !detailModalOpen && setDetailModalOpen((p) => !p)
       }
     >
@@ -144,10 +141,14 @@ const PillarView = ({
           bottom: 2,
         }}
       >
-        <View stretched rows="equal" textAlign="center" verticalAlign="bottom">
-          <View>{(value * 100).toFixed(0)}%</View>
-          <View>{pillar.name}</View>
-          <View>
+        <View style={styles.pillarView}>
+          <Text style={{ color: getTextColor(pillar.color) }}>
+            {(value * 100).toFixed(0)}%
+          </Text>
+          <Text style={{ color: getTextColor(pillar.color) }}>
+            {pillar.name}
+          </Text>
+          <View style={styles.checkingContainer}>
             {submitting && (
               <CheckBox
                 toggle
@@ -163,14 +164,13 @@ const PillarView = ({
               />
             )}
             <Modal
-              open={confirmUndoModalOpen}
-              onClose={() => setConfirmUndoModalOpen(false)}
-              closeIcon
+              visible={confirmUndoModalOpen}
+              onDismiss={() => setConfirmUndoModalOpen(false)}
             >
-              <Header>Are you sure you want to uncheck this pillar?</Header>
+              <Text>Are you sure you want to uncheck this pillar?</Text>
               <View>
                 <Button
-                  primary
+                  title="Confirm Uncheck Pillar Button"
                   onClick={() =>
                     handlePillarUncheckConfirm(
                       removeSubmissionRedux,
@@ -187,12 +187,10 @@ const PillarView = ({
         </View>
       </View>
       <Modal
-        open={detailModalOpen}
-        onClose={() => setDetailModalOpen(false)}
-        closeIcon
-        centered
+        visible={detailModalOpen}
+        onDismiss={() => setDetailModalOpen(false)}
       >
-        <Header>{pillar.name}</Header>
+        <Text>{pillar.name}</Text>
         <View>
           <PillarDescriptionView
             pillar={pillar}
@@ -207,9 +205,12 @@ const PillarView = ({
 };
 
 const styles = StyleSheet.create({
-  main: {
-
+  pillarView: {
+    flexDirection: 'row',
+    flex: 1,
+    alignContent: 'center',
   },
+  checkingContainer: {},
 });
 
 export default PillarView;

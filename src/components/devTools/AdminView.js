@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Header } from 'react-native-elements';
+import { Text, View } from 'react-native';
 
 /**
  * This is the administrative view for the app, which lets you do a lot of things
@@ -12,10 +11,14 @@ import { Header } from 'react-native-elements';
  */
 const AdminView = () => {
   return (
-    <View>
-      <Header>ADMIN VIEW</Header>
+    <View style={styles.main}>
+      <Text>ADMIN VIEW</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  main: {},
+});
 
 export default AdminView;

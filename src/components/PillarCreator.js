@@ -106,57 +106,35 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
   const [error, setError] = useState(null);
 
   return (
-    <View align="center">
-      <View>
-        <Header as="h4">
-          <TextInput
-            fluid
-            type="text"
-            name="name"
-            placeholder="Name of the Pillar"
-            onChange={(value) => setName(value.target.value)}
-          />
-        </Header>
-        <Header as="h5">
-          <TextInput
-            fluid
-            type="text"
-            name="description"
-            placeholder="Description for how to complete"
-            onChange={(value) => setDescription(value.target.value)}
-          />
-        </Header>
-      </View>
-      <Header as="h5">Choose the Color</Header>
-      <ColorPicker
-        defaultColor={color}
-        color={color}
-        onColorChange={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
-        onColorSelected={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
+    <View style={styles.main}>
+      <TextInput
+        placeholder="Name of the Pillar"
+        onChangeText={(text) => setName(text)}
       />
-      <View align="center">
-        <View align="center">
-          <View centered>
-            <View centered>
-              <View>
-                <View>
-                  {displayError(error)}
-                  {createSuccessLabel(success)}
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
+      <TextInput
+        placeholder="Description for how to complete"
+        onChangeText={(text) => setDescription(text)}
+      />
+      <View style={styles.colorPickerView}>
+        <Text>Choose the Color</Text>
+        <ColorPicker
+          defaultColor={color}
+          color={color}
+          onColorChange={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
+          onColorSelected={(c) => setColor(convertHSVToHex([c.h, c.s, c.v]))}
+        />
+      </View>
+      <View style={styles.resultLabelView}>
+        {displayError(error)}
+        {createSuccessLabel(success)}
       </View>
       <Divider />
       <View>
         <Button
+          name="Create Pillar Button"
           loading={isLoading}
           disabled={isLoading}
-          primary
-          size="big"
-          // type="button"
-          onClick={() =>
+          onPress={() =>
             createPillar(
               name,
               description,
@@ -178,7 +156,15 @@ const PillarCreator = ({ closeView, addPillarRedux }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  main: {},
+  main: {
+    alignContent: 'center',
+  },
+  colorPickerView: {
+    alignContent: 'center',
+  },
+  resultLabelView: {
+    alignContent: 'center',
+  },
 });
 
 export default connect(

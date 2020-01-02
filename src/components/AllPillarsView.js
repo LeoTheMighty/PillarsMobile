@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Icon } from 'react-native-elements';
 import type Pillar from '../types/Pillar';
 import PillarView from './PillarView';
 import type PillarSubmission from '../types/PillarSubmission';
@@ -65,9 +64,7 @@ const AllPillarsView = ({
           ))
         ) : (
           <View key={1} verticalAlign="middle">
-            <Text>
-              No Pillars Yet! Press the "+" Button to Start!
-            </Text>
+            <Text>No Pillars Yet! Press the + Button to Start!</Text>
           </View>
         )}
       </View>

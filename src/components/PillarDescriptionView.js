@@ -98,8 +98,12 @@ const PillarDescriptionView = ({
           <ColorPicker
             defaultColor={currentPillar.color}
             color={currentPillar.color}
-            onColorChange={(c) => setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))}
-            onColorSelected={(c) => setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))}
+            onColorChange={(c) =>
+              setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))
+            }
+            onColorSelected={(c) =>
+              setPillarValue('color', convertHSVToHex([c.h, c.s, c.v]))
+            }
           />
         ) : (
           <View
